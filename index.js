@@ -13,6 +13,9 @@ const emailValidation = (input) => !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g.test(inp
 // Validate the response is numbers only
 const numberValidation = (input) => !/^\+?(0|[1-9]\d*)$/g.test(input) ? "Please enter a valid positive number" : true;
 
+let employees = [];
+let employeesArr = [];
+
 const employeeQuestions = [
   {
     type: "list",
@@ -70,7 +73,32 @@ const employeeQuestions = [
 // Function to initialize app
   const init = () => {
     inquirer
-      .prompt(employeeQuestions)
+    .prompt(employeeQuestions)
+    .then((response) => addMember(response))
+    .catch((error) => console.log("Error ==", error));
+  };
+
+  const addMember = ({ name, id, email, officeNum, github, school, role}) => {
+    // employeesArr.push(response.teamName)
+    switch (role) {
+      case "Manager":
+        employees = new Manager({ name, id, email, officeNum});
+        console.log("Manager has been added!");
+        break;
+      case "Engineer":
+        employees = new Engineer({ name, id, email, github});
+        console.log("Engineer has been added!");
+        break;
+      case "Intern":
+        employees = new Intern({ name, id, email, school});
+        console.log("Intern has been added!");
+        break;
+      case "Exit":
+        buildTeam(employeesArr);
+        console.log("Thank you for using the Team Profile Generator!");
+        return;
+    }
+    employeesArr.push(employees);
   };
 
   init();
