@@ -3,6 +3,7 @@ const inquirer = require("inquirer");
 const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
 const Intern = require("./lib/Intern");
+const buildTeam = require("./src/buildTeam");
 
 // Validate the response is not empty
 const inputValidation = (input) => !input ? "Please provide a response" : true;
@@ -70,7 +71,7 @@ const employeeQuestions = [
   },
 ];
   
-// Function to initialize app
+// Initialize app
   const init = () => {
     inquirer
     .prompt(employeeQuestions)
@@ -78,19 +79,19 @@ const employeeQuestions = [
     .catch((error) => console.log("Error ==", error));
   };
 
+// Destructure response and push to employeesArr
   const addMember = ({ name, id, email, officeNum, github, school, role}) => {
-    // employeesArr.push(response.teamName)
     switch (role) {
       case "Manager":
-        employees = new Manager({ name, id, email, officeNum});
+        employees = new Manager(name, id, email, officeNum);
         console.log("Manager has been added!");
         break;
       case "Engineer":
-        employees = new Engineer({ name, id, email, github});
+        employees = new Engineer(name, id, email, github);
         console.log("Engineer has been added!");
         break;
       case "Intern":
-        employees = new Intern({ name, id, email, school});
+        employees = new Intern(name, id, email, school);
         console.log("Intern has been added!");
         break;
       case "Exit":
@@ -99,6 +100,32 @@ const employeeQuestions = [
         return;
     }
     employeesArr.push(employees);
+    promptNewMember();
+  };
+
+// Prompt user to add another role
+  const promptNewMember = () => {
+    inquirer
+      .prompt([
+        {
+          type: "list",
+          message: "Add another team member?",
+          name: "add",
+          choices: ["Yes", "No"],
+        },
+      ])
+      .then((response) => {
+        if (response.add === "Yes") {
+          inquirer
+            .prompt(employeeQuestions)
+            .then((response) => addMember(response))
+            .catch((error) => {
+              console.log("Error ==", error);
+            });
+        } else {
+          buildTeam(employeesArr);
+        }
+      });
   };
 
   init();
