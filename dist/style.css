@@ -1,0 +1,35 @@
+header {
+  background-color: #485563;
+  color: white;
+  padding: 20px 0;
+  margin-bottom: 25px;
+}
+
+.managers,
+.engineers,
+.interns {
+  padding: 20px;
+}
+
+/* Color for Manager cards */
+.managers .card-header {
+  background-color: crimson;
+}
+
+/* Color for Engineer cards */
+.engineers .card-header {
+  background-color: royalblue;
+}
+
+/* Color for Intern cards */
+.interns .card-header {
+  background-color: mediumseagreen;
+}
+
+.card {
+  box-shadow: 10px 5px 5px gainsboro;
+}
+
+.card-header {
+  color: white;
+}

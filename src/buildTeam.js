@@ -94,7 +94,7 @@ const buildHTML = (teamArr) =>
   </head>
   <body>
     <header>
-      <div class="jumbotron text-center">
+      <div class="text-center">
         <h1>My Team</h1>
       </div>
     </header>
