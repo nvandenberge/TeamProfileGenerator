@@ -22,11 +22,53 @@ const buildTeam = (employeesArr) => {
 };
 
 // Generate Manager, Engineer, and Intern cards
-const generateManager = ({ name, id, email, officeNum }) => {};
+const generateManager = ({ name, id, email, officeNum }) =>
+  ` <div class="col-md-6 col-lg-4 managers">
+    <div class="card">
+        <div class="card-header">
+            <h2>${name}</h2>
+            <h3><i class="fas fa-glasses"></i>  Manager</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: ${id}</li>
+            <li class="list-group-item">Email: <a href="mailto:${email}">${email}</a></li>
+            <li class="list-group-item">Office Number: ${officeNum}</li>
+        </ul>
+    </div>
+  </div>
+  `;
 
-const generateEngineer = ({ name, id, email, github }) => {};
+const generateEngineer = ({ name, id, email, github }) =>
+  ` <div class="col-md-6 col-lg-4 engineers">
+      <div class="card">
+          <div class="card-header">
+              <h2>${name}</h2>
+              <h3><i class="fas fa-mug-hot"></i>  Engineer</h3>
+          </div>
+          <ul class="list-group list-group-flush">
+              <li class="list-group-item">ID: ${id}</li>
+              <li class="list-group-item">Email: <a href="mailto:${email}">${email}</a></li>
+              <li class="list-group-item">GitHub: <a target='_blank' href="https://github.com/${github}">${github}</a></li>
+          </ul>
+      </div>
+  </div>
+  `;
 
-const generateIntern = ({ name, id, email, school }) => {};
+const generateIntern = ({ name, id, email, school }) =>
+  ` <div class="col-md-6 col-lg-4 interns">
+    <div class="card">
+        <div class="card-header">
+            <h2>${name}</h2>
+            <h3><i class="fas fa-user-graduate"></i> Intern</h3>
+        </div>
+        <ul class="list-group list-group-flush">
+            <li class="list-group-item">ID: ${id}</li>
+            <li class="list-group-item">Email: <a href="mailto:${email}">${email}</a></li>
+            <li class="list-group-item">School: ${school}</li>
+        </ul>
+    </div>
+  </div>
+  `;
 
 const buildHTML = (teamArr) =>
   `<!DOCTYPE html>
